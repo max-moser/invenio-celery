@@ -1,4 +1,70 @@
-[build-system]
-requires = ["setuptools", "wheel", "babel>2.8"]
-build-backend = "setuptools.build_meta"
+# SPDX-FileCopyrightText: 2015-2024 CERN.
+# SPDX-FileCopyrightText: 2021-2026 TU Wien.
+# SPDX-FileCopyrightText: 2022-2025 Graz University of Technology.
+# SPDX-FileCopyrightText: 2025 Northwestern University.
+# SPDX-License-Identifier: MIT
 
+[project]
+name = "invenio-celery"
+description = "Celery module for Invenio."
+readme = "README.rst"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+  { name = "CERN", email = "info@inveniosoftware.org" },
+]
+keywords = [
+  "celery",
+  "invenio",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+]
+dependencies = [
+  "celery>=5.1.0,<5.5",
+  "flask-celeryext>=0.3.4",
+  "invenio-base>=2.3.0,<3.0.0",
+  "msgpack>=0.6.2",
+  "redis>=2.10.0",
+]
+dynamic = ["version"]
+
+[project.urls]
+Repository = "https://github.com/inveniosoftware/invenio-celery"
+
+[project.entry-points."invenio_base.api_apps"]
+invenio_celery = "invenio_celery:InvenioCelery"
+
+[project.entry-points."invenio_base.apps"]
+invenio_celery = "invenio_celery:InvenioCelery"
+
+[project.optional-dependencies]
+docs = []
+tests = [
+  "pytest-black-ng>=0.4.0",
+  "pytest-invenio>=3.0.0,<4.0.0",
+  "sphinx>=5.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "invenio_celery/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/invenio_celery",
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.pydocstyle]
+add_ignore = "D401"
+
+[tool.pytest.ini_options]
+addopts = '--black --isort --pydocstyle --doctest-glob="*.rst" --doctest-modules --cov=invenio_celery --cov-report=term-missing'
+testpaths = "tests invenio_celery"
+live_server_scope = "module"
