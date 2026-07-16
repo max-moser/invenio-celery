@@ -1,5 +1,6 @@
 # SPDX-FileCopyrightText: 2015-2024 CERN.
 # SPDX-FileCopyrightText: 2024-2025 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 TU Wien.
 # SPDX-License-Identifier: MIT
 
 """Celery distributed task queue module for Invenio.
@@ -86,6 +87,6 @@ from __future__ import absolute_import, print_function
 
 from .ext import InvenioCelery
 
-__version__ = "2.2.0"
+__version__ = "2.2.1"
 
 __all__ = ("__version__", "InvenioCelery")
